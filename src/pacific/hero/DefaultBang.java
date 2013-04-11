@@ -12,7 +12,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class DefaultBang extends Entity {
 	int cooldown = 10;
 	public DefaultBang(ArrayList<Entity> en,CCoord ws,CCoord position) throws FileNotFoundException, IOException {
-		super(en,new CCoord(62,100),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/bang_01.png"))));
+		super(en,new CCoord(100,100),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/bang_01.png"))));
 		pos = position;
 	}
 	public void act(){

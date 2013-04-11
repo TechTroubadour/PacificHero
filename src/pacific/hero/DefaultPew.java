@@ -32,7 +32,7 @@ public class DefaultPew extends Entity {
 			if(!entities.get(i).friendly&&bb.intersects(entities.get(i).getBB())){
 				entities.get(i).hit();
 				try {
-					entities.add(new DefaultBang(entities,wS,pos));
+					entities.add(new DefaultBang(entities,wS,new CCoord(pos.x-50,pos.y-50)));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

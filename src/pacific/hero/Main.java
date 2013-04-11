@@ -1,7 +1,6 @@
 package pacific.hero;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.geom.Rectangle2D;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,8 +11,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
 public class Main {
 	static final int RIGHT = 0;
@@ -27,6 +24,8 @@ public class Main {
 	ArrayList<Entity> entities;
 	Player player;
 	boolean click = false;
+	boolean debug = false;
+	boolean[] keyDown = new boolean[Keyboard.getKeyCount()];
 	CCoord wS = new CCoord(wW,wW);
 	public void start()	{
 		try {
@@ -57,7 +56,6 @@ public class Main {
 			e.printStackTrace();
 		}
 
-
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		while(!Display.isCloseRequested()){
@@ -86,7 +84,15 @@ public class Main {
 				water.vel.y++;
 			}if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)&&Keyboard.isKeyDown(Keyboard.KEY_W)){
 				System.exit(0);
-			}
+			}if(Keyboard.isKeyDown(Keyboard.KEY_F3)){
+				if(!keyDown[Keyboard.KEY_F3]) {
+					keyDown[Keyboard.KEY_F3]=true;
+					if(debug)
+						debug = false;
+					else
+						debug = true;
+				}
+			}else{keyDown[Keyboard.KEY_F3]=false;}
 			
 			if(Mouse.isButtonDown(0)){
 				if(!click){
@@ -120,10 +126,14 @@ public class Main {
 		Display.destroy();
 	}
 	public void drawGame() {
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 		drawWater();
 		drawPlayer();
 		drawEntities();
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		if(debug)
+			drawDebug();
 	}
 	public void drawWater(){
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, water.getTexture().getTextureID());
@@ -179,6 +189,33 @@ public class Main {
 				GL11.glVertex2d(p.x+s, p.y+0);
 				GL11.glTexCoord2d(0,1);
 				GL11.glVertex2d(p.x+0, p.y+0);
+			GL11.glEnd();
+		}
+	}
+	public void drawDebug(){
+		drawHitBoxes();
+	}
+	public void drawHitBoxes(){
+		double s = player.getLongestSide();
+		Rectangle2D.Double p = player.getBB();
+		GL11.glColor3f(1f, 1f, 1f);
+		GL11.glBegin(GL11.GL_LINE_STRIP);
+			GL11.glVertex2d(p.x+0, p.y+p.height);
+			GL11.glVertex2d(p.x+p.width, p.y+p.height);
+			GL11.glVertex2d(p.x+p.width, p.y+0);
+			GL11.glVertex2d(p.x+0, p.y+0);
+			GL11.glVertex2d(p.x+0, p.y+p.height);
+		GL11.glEnd();
+		for(int i = 0; i < entities.size(); i++){
+			s = entities.get(i).getLongestSide();
+			p = entities.get(i).getBB();
+			GL11.glColor3f(1f, 1f, 1f);
+			GL11.glBegin(GL11.GL_LINE_STRIP);
+				GL11.glVertex2d(p.x+0, p.y+p.height);
+				GL11.glVertex2d(p.x+p.width, p.y+p.height);
+				GL11.glVertex2d(p.x+p.width, p.y+0);
+				GL11.glVertex2d(p.x+0, p.y+0);
+				GL11.glVertex2d(p.x+0, p.y+p.height);
 			GL11.glEnd();
 		}
 	}
