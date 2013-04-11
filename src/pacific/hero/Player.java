@@ -14,8 +14,8 @@ public class Player extends Entity {
 	int maxSpeed;
 	int cooldown = 7;
 	int currentCooldown = 0;
-	public Player(ArrayList<Entity> en, int size, CCoord ws) throws FileNotFoundException, IOException {
-		super(en,size,ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player_01.png"))));
+	public Player(ArrayList<Entity> en, CCoord ws) throws FileNotFoundException, IOException {
+		super(en,new CCoord(86,100),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player_01.png"))));
 		speed = 10;
 		maxSpeed = speed;
 	}

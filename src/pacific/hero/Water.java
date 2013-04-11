@@ -10,7 +10,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class Water extends Entity {
 	double y;
 	public Water(CCoord ws) throws FileNotFoundException, IOException {
-		super(null,(int)(ws.x),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/water_02.png"))));
+		super(null,new CCoord(ws.x,ws.x),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/water_02.png"))));
 		vel = new CCoord(0,-7);
 	}
 	

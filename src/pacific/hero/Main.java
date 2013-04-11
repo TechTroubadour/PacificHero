@@ -49,7 +49,7 @@ public class Main {
 
 		entities = new ArrayList<Entity>();
 		try {
-			player = new Player(entities, 50, wS);
+			player = new Player(entities, wS);
 			water = new Water(wS);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class Main {
 					click = true;
 					System.out.println("CLICK "+Mouse.getX()+" "+Mouse.getY());
 					try {
-						entities.add(new PatrolBoat(entities,100,wS,new CCoord(Mouse.getX(),Mouse.getY())));
+						entities.add(new PatrolBoat(entities,wS,new CCoord(Mouse.getX(),Mouse.getY())));
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -127,7 +127,7 @@ public class Main {
 	}
 	public void drawWater(){
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, water.getTexture().getTextureID());
-		int s = water.getSize();
+		double s = water.getLongestSide();
 		CCoord p = water.getPos();
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(0,0);
@@ -152,7 +152,7 @@ public class Main {
 	}
 	public void drawPlayer(){
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, player.getTexture().getTextureID());
-		int s = player.getSize();
+		double s = player.getLongestSide();
 		CCoord p = player.getPos();
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(0,0);
@@ -168,7 +168,7 @@ public class Main {
 	public void drawEntities(){
 		for(int i = 0; i < entities.size(); i++){
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, entities.get(i).getTexture().getTextureID());
-			int s = entities.get(i).getSize();
+			double s = entities.get(i).getLongestSide();
 			CCoord p = entities.get(i).getPos();
 			GL11.glBegin(GL11.GL_QUADS);
 				GL11.glTexCoord2d(0,0);

@@ -1,6 +1,7 @@
 package pacific.hero;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ public abstract class Entity{
 	CCoord pos;
 	CCoord vel;
 	CCoord wS; // Window Size
-	int size;
+	CCoord size;
 	Texture tex;
 	boolean friendly = true;
-	public Entity(ArrayList<Entity> en, int size, CCoord windowSize, Texture t){
+	public Entity(ArrayList<Entity> en, CCoord size, CCoord windowSize, Texture t){
 		entities = en;
 		pos = new CCoord(0,0);
 		vel = new CCoord(0,0);
@@ -35,7 +36,10 @@ public abstract class Entity{
 	public CCoord getPos(){
 		return pos;
 	}
-	public int getSize(){
+	public double getLongestSide(){
+		return size.getLargest();
+	}
+	public CCoord getSize() {
 		return size;
 	}
 	public void reset(){
@@ -52,12 +56,12 @@ public abstract class Entity{
 		double y = vel.y;
 		if(next.x<0){
 			x = vel.x-next.x;
-		}else if(next.x+size>wS.x){
-			x = vel.x-(next.x+size-wS.x);
+		}else if(next.x+size.x>wS.x){
+			x = vel.x-(next.x+size.x-wS.x);
 		}if(next.y<0){
 			y = vel.y-next.y;
-		}else if(next.y+size>wS.y){
-			y = vel.y-(next.y+size-wS.y);
+		}else if(next.y+size.y>wS.y){
+			y = vel.y-(next.y+size.y-wS.y);
 		}
 		return new CCoord(x,y);
 	}
@@ -67,7 +71,7 @@ public abstract class Entity{
 	public void hit(){
 		
 	}
-	public Rectangle getBB(){
-		return new Rectangle((int)pos.x, (int)pos.y, size, size);
+	public Rectangle2D.Double getBB(){
+		return new Rectangle2D.Double(pos.x + 0.5 * size.y - 0.5 * size.x, pos.y, size.x, size.y);
 	}
 }

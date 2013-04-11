@@ -16,4 +16,7 @@ public class CCoord {
 	public CCoord getDifference(CCoord greater, double damp){
 		return new CCoord((greater.x - this.x)/damp, (greater.y - this.y)/damp);
 	}
+	public double getLargest(){
+		return Math.max(x, y);
+	}
 }
