@@ -5,6 +5,8 @@ The bullet-hell style shooter game designed by students from Santa Susana High S
 
 #Controls
  - W/A/S/D - Movement
+ - Left Click - Spawn Enemy
+ - Spacebar - Fire weapons
  - Left Shift - (Hold) half speed
  - Tab/Capslock - increase/decrease speed of water
  - F3 - Debug mode
