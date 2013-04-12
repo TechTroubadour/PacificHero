@@ -11,3 +11,8 @@ The bullet-hell style shooter game designed by two students from Santa Susana Hi
  - Tab/Capslock - increase/decrease speed of water
  - F3 - Debug mode
  - Left Ctrl + W - Exit Game
+
+#Setup
+You'll download all the necessary libraries, but you'll have to link them yourself.
+The required .jars are located in lib/jars and the natives for lwjgl.jar are in 
+lib/natives-win.
