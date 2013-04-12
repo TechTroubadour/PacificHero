@@ -16,3 +16,9 @@ The bullet-hell style shooter game designed by two students from Santa Susana Hi
 You'll download all the necessary libraries, but you'll have to link them yourself.
 The required .jars are located in lib/jars and the natives for lwjgl.jar are in 
 lib/natives-win.
+
+#Features
+ - Someone fill this out fore me...
+
+#Possible Future Features
+ - These are kind of like suggestions...
