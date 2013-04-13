@@ -164,14 +164,15 @@ public class Main {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, player.getTexture().getTextureID());
 		double s = player.getLongestSide();
 		CCoord p = player.getPos();
+		Rectangle2D.Double tp = player.getTexPos();
 		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2d(0,0);
+			GL11.glTexCoord2d(tp.x,tp.y);
 			GL11.glVertex2d(p.x+0, p.y+s);
-			GL11.glTexCoord2d(1,0);
+			GL11.glTexCoord2d(tp.x+tp.width,tp.y);
 			GL11.glVertex2d(p.x+s, p.y+s);
-			GL11.glTexCoord2d(1,1);
+			GL11.glTexCoord2d(tp.x+tp.width,tp.y+tp.height);
 			GL11.glVertex2d(p.x+s, p.y+0);
-			GL11.glTexCoord2d(0,1);
+			GL11.glTexCoord2d(tp.x,tp.y+tp.height);
 			GL11.glVertex2d(p.x+0, p.y+0);
 		GL11.glEnd();
 	}
@@ -180,14 +181,15 @@ public class Main {
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, entities.get(i).getTexture().getTextureID());
 			double s = entities.get(i).getLongestSide();
 			CCoord p = entities.get(i).getPos();
+			Rectangle2D.Double tp = entities.get(i).getTexPos();
 			GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2d(0,0);
+				GL11.glTexCoord2d(tp.x,tp.y);
 				GL11.glVertex2d(p.x+0, p.y+s);
-				GL11.glTexCoord2d(1,0);
+				GL11.glTexCoord2d(tp.x+tp.width,tp.y);
 				GL11.glVertex2d(p.x+s, p.y+s);
-				GL11.glTexCoord2d(1,1);
+				GL11.glTexCoord2d(tp.x+tp.width,tp.y+tp.height);
 				GL11.glVertex2d(p.x+s, p.y+0);
-				GL11.glTexCoord2d(0,1);
+				GL11.glTexCoord2d(tp.x,tp.y+tp.height);
 				GL11.glVertex2d(p.x+0, p.y+0);
 			GL11.glEnd();
 		}

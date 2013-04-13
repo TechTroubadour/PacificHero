@@ -14,7 +14,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class DefaultPew extends Entity {
 	public DefaultPew(Entity firedFrom) throws FileNotFoundException, IOException{
-		super(firedFrom.entities,new CCoord(20,32),firedFrom.wS,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/pew_01.png"))));
+		super(firedFrom.entities,new CCoord(12,32),firedFrom.wS,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/pew_01.png"))));
 		pos = firedFrom.pos.copy();
 		double midP = firedFrom.getSize().x/2;
 		midP -= 15;
@@ -42,5 +42,8 @@ public class DefaultPew extends Entity {
 			}
 		}
 		System.out.println("DEFAULT PEW");
+	}
+	public Rectangle2D.Double getTexPos(){
+		return new Rectangle2D.Double(0,0,1,1);
 	}
 }

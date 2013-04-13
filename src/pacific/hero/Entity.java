@@ -22,6 +22,9 @@ public abstract class Entity{
 	CCoord size;
 	Texture tex;
 	boolean friendly = true;
+	public int frame = 0;
+	public int frame_max_cooldown = 4;
+	public int frame_cooldown = frame_max_cooldown;
 	public Entity(ArrayList<Entity> en, CCoord size, CCoord windowSize, Texture t){
 		entities = en;
 		pos = new CCoord(0,0);
@@ -36,6 +39,10 @@ public abstract class Entity{
 	public CCoord getPos(){
 		return pos;
 	}
+	public void setFrameMaxCooldown(int num){
+		frame_max_cooldown = num;
+		frame_cooldown = frame_max_cooldown;
+	}
 	public double getLongestSide(){
 		return size.getLargest();
 	}
@@ -46,6 +53,14 @@ public abstract class Entity{
 		vel = new CCoord(0,0);
 	}
 	public void act(){
+		frame_cooldown--;
+		if(frame_cooldown < 0){
+			if(frame < 3)
+				frame++;
+			else
+				frame = 0;
+			frame_cooldown = frame_max_cooldown;
+		}
 		CCoord next = pos.copy();
 		next.add(vel);
 		vel = fixVelocity(next);
@@ -73,5 +88,20 @@ public abstract class Entity{
 	}
 	public Rectangle2D.Double getBB(){
 		return new Rectangle2D.Double(pos.x + 0.5 * size.y - 0.5 * size.x, pos.y, size.x, size.y);
+	}
+	public Rectangle2D.Double getTexPos(){
+		switch(frame){
+		case 0:
+			return new Rectangle2D.Double(0,0,0.5,0.5);
+		case 1:
+			return new Rectangle2D.Double(0.5,0,0.5,0.5);
+		case 2:
+			return new Rectangle2D.Double(0,0.5,0.5,0.5);
+		case 3:
+			return new Rectangle2D.Double(0.5,0.5,0.5,0.5);
+		default:
+			System.out.println("BAD FRAME: "+frame);
+			return new Rectangle2D.Double(0,0,1,1);
+		}
 	}
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.opengl.TextureLoader;
 
-public class PatrolBoat extends Entity {
+public class PatrolBoat extends Vehicle {
 	public PatrolBoat(ArrayList<Entity> en,CCoord ws) throws FileNotFoundException, IOException {
-		super(en,new CCoord(61,128),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/enemy_01.png"))));
+		super(en,new CCoord(36,128),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/small_battleship_01.png"))));
 		friendly = false;
 	}
 	public PatrolBoat(ArrayList<Entity> en,CCoord ws,CCoord position) throws FileNotFoundException, IOException {
-		super(en,new CCoord(61,128),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/enemy_01.png"))));
+		super(en,new CCoord(36,128),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/small_battleship_01.png"))));
 		friendly = false;
 		pos = position;
 	}

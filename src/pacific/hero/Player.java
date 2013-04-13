@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-public class Player extends Entity {
+public class Player extends Vehicle {
 	int speed;
 	int maxSpeed;
 	int cooldown = 7;
 	int currentCooldown = 0;
 	public Player(ArrayList<Entity> en, CCoord ws) throws FileNotFoundException, IOException {
-		super(en,new CCoord(40,64),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player_01.png"))));
+		super(en,new CCoord(18,64),ws,TextureLoader.getTexture("PNG", new FileInputStream(new File("res/small_battleship_01.png"))));
 		speed = 10;
 		maxSpeed = speed;
 	}
@@ -41,6 +41,7 @@ public class Player extends Entity {
 		speed = maxSpeed;
 	}
 	public void move(int dir){
+		System.out.println("THE TIME IS NOW "+dir);
 		switch(dir){
 		case UP:
 			vel.add(new CCoord(0,speed));
